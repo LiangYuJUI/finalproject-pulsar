@@ -23,6 +23,8 @@ graph
 啟動Apache Pulsar
 ```
 cd pulsar
+sudo mkdir -p ./data/zookeeper ./data/bookkeeper
+sudo chown -R 10000 data
 docker-compose up -d
 ```
 啟動Elastic Stack
