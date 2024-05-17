@@ -20,13 +20,18 @@ graph
 
 ### 佈署流程
 請在wsl、linux、mac上執行(mac環境問題請自行處理)
+啟動Apache Pulsar
 ```
-cd docker-elk
+cd pulsar
+docker-compose up -d
+```
+啟動Elastic Stack
+```
+cd elastic
 docker-compose up -d
 ```
 ### 測試運行
 用瀏覽確認localhost:9200有沒有正常運行(Elasticsearch)
-![alt text](README_image/image.png)
-
+![alt text](README_image/imageE.png)
 用瀏覽確認localhost:5601有沒有正常運行(Kibana)
-![alt text](README_image/image-1.png)
+![alt text](README_image/imageK.png)
