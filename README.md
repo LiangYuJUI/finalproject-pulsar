@@ -18,7 +18,7 @@ graph
     C --> D[Kibana 視覺化UI]
 ```
 
-### 佈署流程
+### Pulsar佈署流程
 請在wsl、linux、mac上執行(mac環境問題請自行處理)
 啟動Apache Pulsar
 ```
@@ -27,6 +27,17 @@ sudo mkdir -p ./data/zookeeper ./data/bookkeeper
 sudo chown -R 10000 data
 docker-compose up -d
 ```
+### 測試運行
+如有版本問題建議安裝nvm管理
+```
+cd npm_client
+nvm install 18 (option)
+nvm use 18.X.X (option)
+npm install
+node index.js 或 npm start
+```
+
+### Elastic
 啟動Elastic Stack
 ```
 cd elastic
