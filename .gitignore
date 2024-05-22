@@ -1,3 +1,6 @@
 /elk
 /docker-elk
 /pulsar/data
+/npm_client/node_modules
+/logging_test/node_modules
+/logging_test/logs

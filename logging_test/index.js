@@ -24,7 +24,7 @@ server.listen(3000, () => {
 })
 
 function handler (req, res) {
- res.setHeader('Foo', 'Bar')
-  res.end('ok')
-  logger.info('handled request', { req, res })
+    res.setHeader('Foo', 'Bar')
+    res.end('ok')
+    logger.info('handled request', { req, res })
 }

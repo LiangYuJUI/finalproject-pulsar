@@ -22,6 +22,10 @@ graph
 請在wsl、linux、mac上執行(mac環境問題請自行處理)
 啟動Apache Pulsar
 ```
+若docker沒自動啟動
+ulimit -n 65536
+service docker start
+
 cd pulsar
 sudo mkdir -p ./data/zookeeper ./data/bookkeeper
 sudo chown -R 10000 data
@@ -48,3 +52,23 @@ docker-compose up -d
 ![alt text](README_image/imageE.png)
 用瀏覽確認localhost:5601有沒有正常運行(Kibana)
 ![alt text](README_image/imageK.png)
+
+### Logging
+service logs 會存在logs資料夾裡
+```
+cd logging_test
+npm install
+node index.js 或 npm start
+打http://localhost:3000 GET
+```
+
+### Filebeat蒐集logs
+Filebeat會從logs資料夾撈新的log
+只要資料有更新就會做撈取
+```
+cd filebeat
+docker compose up -d
+若想看log資料有沒有抓進去 可以用
+docker compose up
+docker logs <ID>
+```
