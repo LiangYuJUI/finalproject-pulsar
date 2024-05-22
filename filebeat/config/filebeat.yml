@@ -7,5 +7,6 @@ filebeat.inputs:
     log_type: "app_logs"
   fields_under_root: true
 
+# output設定在容器中印出來 之後要串pulsar
 output.console:
   pretty: true
