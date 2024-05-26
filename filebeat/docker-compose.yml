@@ -2,45 +2,52 @@ version: "3"
 
 services:
   filebeat:
-    image: elastic/filebeat:7.9.1
+    image: golang:1.18
     user: root
     networks:
-      - elk
-    configs:
-      - source: fb_config
-        target: /usr/share/filebeat/filebeat.yml
+      - pulsar
+      
     volumes:
-      - filebeat:/usr/share/filebeat/data
-      - ../logging_test/logs:/usr/share/filebeat/logs:ro
-      # - /var/run/docker.sock:/var/run/docker.sock
-      # # This is needed for filebeat to load container log path as specified in filebeat.yml
-      # - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+      - ./pulsar-beat-output:/app/pulsar-beat-output:rw
+      - ../logging_test/logs:/app/filebeat/logs:ro
+      # - filebeat:/usr/share/filebeat/data
+    working_dir: /app/pulsar-beat-output
+    
 
-      # # # This is needed for filebeat to load jenkins build log path as specified in filebeat.yml
-      # # - /var/lib/docker/volumes/jenkins_home/_data/jobs/:/var/lib/docker/volumes/jenkins_home/_data/jobs/:ro
+    # command: >
+    #   /bin/sh -c "
+    #   go build -o filebeat_build filebeat/filebeat.go &&
+    #   chown -R root:root sample/config/filebeat.yml test_module/modules.d/system.yml test_module/module/system &&
+    #   cp filebeat_build sample/config/filebeat.yml test_module &&
+    #   cd test_module &&
+    #   chown -R root:root filebeat.yml
+    #   ./filebeat_build modules enable system &&
+    #   ./filebeat_build -c filebeat.yml --strict.perms=false
+    #   "
+    command: >
+      /bin/sh -c "
+      chown root:root . &&
+      chmod 700 . &&
+      cd test_module &&
+      echo 'Enabling system module...' &&
+      ./filebeat_build -e -strict.perms=false &&
+      ./filebeat_build modules enable system &&
+      echo 'Starting filebeat with custom configuration...' &&
+      ./filebeat_build -c filebeat.yml --strict.perms=false
+      "
 
-      # # This is needed for filebeat to load logs for system and auth modules
-      # - /var/log/:/var/log/:ro
-      # # This is needed for filebeat to load logs for auditd module. you might have to install audit system
-      # # on ubuntu first (sudo apt-get install -y auditd audispd-plugins)
-      # - /var/log/audit/:/var/log/audit/:ro
-    # environment:
-    #   - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-node1}
-    #   - KIBANA_HOST=${KIBANA_HOST:-node1}
-    #   - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
-    #   - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
-    # disable strict permission checks
-    command: ["--strict.perms=false"]
-    deploy:
-      mode: global
+    environment:
+      - GO111MODULE=on
+    # deploy:
+    #   mode: global
 
 networks:
-  elk:
+  pulsar:
     driver: bridge
 
-volumes:
-  filebeat:
+# volumes:
+#   filebeat:
 
-configs:
-  fb_config:
-    file: ./config/filebeat.yml
+# configs:
+#   fb_config:
+#     file: ./pulsar-beat-output
