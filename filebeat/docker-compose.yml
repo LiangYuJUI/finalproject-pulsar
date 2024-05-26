@@ -4,8 +4,9 @@ services:
   filebeat:
     image: golang:1.18
     user: root
-    networks:
-      - pulsar
+    # networks:
+    #   - pulsar
+    network_mode: host
       
     volumes:
       - ./pulsar-beat-output:/app/pulsar-beat-output:rw
@@ -26,8 +27,10 @@ services:
     #   "
     command: >
       /bin/sh -c "
+      go build -o filebeat_build filebeat/filebeat.go &&
       chown root:root . &&
       chmod 700 . &&
+      cp filebeat_build test_module &&
       cd test_module &&
       echo 'Enabling system module...' &&
       ./filebeat_build -e -strict.perms=false &&
@@ -41,9 +44,13 @@ services:
     # deploy:
     #   mode: global
 
-networks:
-  pulsar:
-    driver: bridge
+# networks:
+#   pulsar:
+#     driver: bridge
+# networks:
+#   pulsar:
+#     external: true
+
 
 # volumes:
 #   filebeat:
