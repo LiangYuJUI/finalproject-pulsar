@@ -13,6 +13,8 @@ https://github.com/twtrubiks/docker-elk-tutorial
 ```
 ```mermaid
 graph
+    E[logs/log*.json] -->|logs採集| F[FileBeat]
+    F -->|output.pulsar| A
     A[Apache Pulsar] -->|message| B[Logstash 後端server]
     B --> C[Elasticsearch y 資料庫NoSQL]
     C --> D[Kibana 視覺化UI]
