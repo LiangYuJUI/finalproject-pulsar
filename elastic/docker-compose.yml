@@ -31,7 +31,7 @@ services:
       - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ls_data:/usr/share/logstash/data
-
+      - ./logstash/test.json:/usr/share/logstash/test.json
     networks:
       - elk
     depends_on:

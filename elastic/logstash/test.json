@@ -1,0 +1,24 @@
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:00:00Z", "log_level": "INFO", "message": "System startup completed.", "service": "system_service", "details": { "hostname": "server01", "ip_address": "192.168.1.1" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:05:30Z", "log_level": "DEBUG", "message": "Executed database query.", "service": "db_service", "details": { "query": "SELECT * FROM users WHERE id = 1", "execution_time": "15ms" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:10:00Z", "log_level": "WARN", "message": "Memory usage exceeded threshold.", "service": "monitoring_service", "details": { "current_usage": "85%", "threshold": "80%" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:15:45Z", "log_level": "ERROR", "message": "File not found.", "service": "file_service", "details": { "filename": "/var/logs/app.log", "error_code": "ENOENT" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:20:30Z", "log_level": "FATAL", "message": "System crash detected.", "service": "system_service", "details": { "hostname": "server02", "ip_address": "192.168.1.2", "error_message": "Kernel panic" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:25:00Z", "log_level": "INFO", "message": "User logged in.", "service": "auth_service", "details": { "user_id": "user123", "username": "johndoe", "ip_address": "192.168.1.3" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:30:00Z", "log_level": "INFO", "message": "API request processed.", "service": "api_service", "details": { "endpoint": "/api/v1/resource", "method": "GET", "status_code": 200, "response_time": "120ms" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:35:00Z", "log_level": "INFO", "message": "Scheduled task executed.", "service": "scheduler_service", "details": { "task_id": "task456", "task_name": "data_backup", "status": "completed", "execution_time": "2m" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:40:00Z", "log_level": "DEBUG", "message": "Cache cleared.", "service": "cache_service", "details": { "cache_name": "user_sessions", "items_cleared": 150 } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:45:00Z", "log_level": "WARN", "message": "High CPU usage detected.", "service": "monitoring_service", "details": { "current_usage": "90%", "threshold": "85%" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:50:00Z", "log_level": "ERROR", "message": "Unauthorized access attempt.", "service": "security_service", "details": { "user_id": "unknown", "ip_address": "192.168.1.4", "attempted_resource": "/admin" } } }
+{ "index" : {} }
+{ "event": { "timestamp": "2024-05-27T08:55:00Z", "log_level": "INFO", "message": "Daily report generated.", "service": "reporting_service", "details": { "report_id": "report789", "generation_time": "1m" } } }
