@@ -1,0 +1,40 @@
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "rollover": {
+            "max_age": "1m",
+            "max_docs": 1000
+          },
+          "set_priority": {
+            "priority": 150
+          }
+        }
+      },
+      "warm": {
+        "min_age": "0m",
+        "actions": {
+          "set_priority": {
+            "priority": 100
+          }
+        }
+      },
+      "cold": {
+        "min_age": "3m",
+        "actions": {
+          "set_priority": {
+            "priority": 50
+          }
+        }
+      },
+      "delete": {
+        "min_age": "10m",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
