@@ -1,25 +1,81 @@
 version: '3'
 
 services:
-  elasticsearch:
-    image: elasticsearch:7.9.1
-    container_name: elasticsearch
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    volumes:
-      - test_data:/usr/share/elasticsearch/data/
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  
+  #elasticsearch:
+  # image: elasticsearch:7.9.1
+  # container_name: elasticsearch
+  # ports:
+  #   - "9200:9200"
+  #   - "9300:9300"
+  # volumes:
+  #   - test_data:/usr/share/elasticsearch/data/
+  #   - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  # environment:
+  #   - discovery.type=single-node
+  #   - http.host=0.0.0.0
+  #   - transport.host=0.0.0.0
+  #   - xpack.security.enabled=false
+  #   - xpack.monitoring.enabled=false
+  #   - cluster.name=elasticsearch
+  #   - bootstrap.memory_lock=true
+  # networks:
+  #   - elk
+  elasticsearch-hot:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    container_name: hot
     environment:
-      - discovery.type=single-node
-      - http.host=0.0.0.0
-      - transport.host=0.0.0.0
-      - xpack.security.enabled=false
-      - xpack.monitoring.enabled=false
-      - cluster.name=elasticsearch
-      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # - ELASTIC_PASSWORD=foobar
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    volumes:
+      - ./hot_node/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml  
+      - $PWD:/usr/share/elasticsearch/config/docker_host
+      - hot_data:/usr/share/elasticsearch/data/
     networks:
       - elk
+
+  elasticsearch-warm:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    container_name: warm
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # - ELASTIC_PASSWORD=foobar
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9201:9201
+    volumes:
+      - ./warm_node/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml  
+      - $PWD:/usr/share/elasticsearch/config/docker_host
+      - warm_data:/usr/share/elasticsearch/data/
+    networks:
+      - elk
+
+  elasticsearch-cold:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    container_name: cold
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9202:9202
+    volumes:
+      - ./cold_node/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml  
+      - $PWD:/usr/share/elasticsearch/config/docker_host
+      - cold_data:/usr/share/elasticsearch/data/
+    networks:
+      - elk 
 
   logstash:
     image: logstash:7.9.1
@@ -35,7 +91,8 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      #- elasticsearch
+      - elasticsearch-hot
 
   kibana:
     image: kibana:7.9.1
@@ -48,7 +105,8 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      #- elasticsearch
+      - elasticsearch-hot
 
 networks:
   elk:
@@ -56,5 +114,8 @@ networks:
 
 volumes:
   test_data:
+  hot_data:
+  warm_data:
+  cold_data:
   ls_data:
   kb_data:
