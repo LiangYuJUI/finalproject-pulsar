@@ -1,0 +1,11 @@
+{
+  "description" : "automatically add the current time to the documents",
+  "processors" : [
+    {
+      "set" : {
+        "field": "@timestamp",
+        "value": "{{{_ingest.timestamp}}}"
+      }
+    }
+  ]
+}
