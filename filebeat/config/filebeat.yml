@@ -1,12 +1,19 @@
-filebeat.inputs:
-- type: log
-  enabled: true
-  paths:
-    - /usr/share/filebeat/logs/log-*.json
-  fields:
-    log_type: "app_logs"
-  fields_under_root: true
+input {
+beats {
+port => 5044
+}
+}
 
-# output設定在容器中印出來 之後要串pulsar
-output.console:
-  pretty: true
+filter {
+json {
+source => "message"
+remove_field => ["message"]
+}
+}
+
+output {
+elasticsearch {
+hosts => ["elasticsearch:9200"]
+index => "logs-%{+YYYY.MM.dd}"
+}
+}

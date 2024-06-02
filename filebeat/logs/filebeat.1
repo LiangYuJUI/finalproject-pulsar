@@ -1,0 +1,34 @@
+2024-05-27T13:22:53.307Z	INFO	instance/beat.go:640	Home path: [/usr/share/filebeat] Config path: [/usr/share/filebeat] Data path: [/usr/share/filebeat/data] Logs path: [/usr/share/filebeat/logs]
+2024-05-27T13:22:53.331Z	INFO	instance/beat.go:648	Beat ID: 0f2ec401-ba17-4f52-af27-addb13fda4cf
+2024-05-27T13:22:53.332Z	INFO	[seccomp]	seccomp/seccomp.go:124	Syscall filter successfully installed
+2024-05-27T13:22:53.333Z	INFO	[beat]	instance/beat.go:976	Beat info	{"system_info": {"beat": {"path": {"config": "/usr/share/filebeat", "data": "/usr/share/filebeat/data", "home": "/usr/share/filebeat", "logs": "/usr/share/filebeat/logs"}, "type": "filebeat", "uuid": "0f2ec401-ba17-4f52-af27-addb13fda4cf"}}}
+2024-05-27T13:22:53.333Z	INFO	[beat]	instance/beat.go:985	Build info	{"system_info": {"build": {"commit": "ad823eca4cc74439d1a44351c596c12ab51054f5", "libbeat": "7.9.1", "time": "2020-09-01T19:58:51.000Z", "version": "7.9.1"}}}
+2024-05-27T13:22:53.333Z	INFO	[beat]	instance/beat.go:988	Go runtime info	{"system_info": {"go": {"os":"linux","arch":"amd64","max_procs":12,"version":"go1.14.7"}}}
+2024-05-27T13:22:53.334Z	INFO	[beat]	instance/beat.go:992	Host info	{"system_info": {"host": {"architecture":"x86_64","boot_time":"2024-05-27T04:03:34Z","containerized":true,"name":"cc62522d7e0f","ip":["127.0.0.1/8","::1/128","172.27.0.2/16","fe80::42:acff:fe1b:2/64"],"kernel_version":"5.15.146.1-microsoft-standard-WSL2","mac":["02:42:ac:1b:00:02"],"os":{"family":"redhat","platform":"centos","name":"CentOS Linux","version":"7 (Core)","major":7,"minor":8,"patch":2003,"codename":"Core"},"timezone":"UTC","timezone_offset_sec":0}}}
+2024-05-27T13:22:53.335Z	INFO	[beat]	instance/beat.go:1021	Process info	{"system_info": {"process": {"capabilities": {"inheritable":null,"permitted":["chown","dac_override","fowner","fsetid","kill","setgid","setuid","setpcap","net_bind_service","net_raw","sys_chroot","mknod","audit_write","setfcap"],"effective":["chown","dac_override","fowner","fsetid","kill","setgid","setuid","setpcap","net_bind_service","net_raw","sys_chroot","mknod","audit_write","setfcap"],"bounding":["chown","dac_override","fowner","fsetid","kill","setgid","setuid","setpcap","net_bind_service","net_raw","sys_chroot","mknod","audit_write","setfcap"],"ambient":null}, "cwd": "/usr/share/filebeat", "exe": "/usr/share/filebeat/filebeat", "name": "filebeat", "pid": 1, "ppid": 0, "seccomp": {"mode":"filter","no_new_privs":true}, "start_time": "2024-05-27T13:22:52.430Z"}}}
+2024-05-27T13:22:53.335Z	INFO	instance/beat.go:299	Setup Beat: filebeat; Version: 7.9.1
+2024-05-27T13:22:53.335Z	INFO	[index-management]	idxmgmt/std.go:184	Set output.elasticsearch.index to 'filebeat-7.9.1' as ILM is enabled.
+2024-05-27T13:22:53.335Z	INFO	[add_cloud_metadata]	add_cloud_metadata/add_cloud_metadata.go:89	add_cloud_metadata: hosting provider type not detected.
+2024-05-27T13:22:53.335Z	INFO	eslegclient/connection.go:99	elasticsearch url: http://elasticsearch:9200
+2024-05-27T13:22:53.336Z	INFO	[publisher]	pipeline/module.go:113	Beat name: cc62522d7e0f
+2024-05-27T13:22:53.338Z	INFO	[monitoring]	log/log.go:118	Starting metrics logging every 30s
+2024-05-27T13:22:53.338Z	INFO	instance/beat.go:450	filebeat start running.
+2024-05-27T13:22:53.338Z	INFO	memlog/store.go:119	Loading data file of '/usr/share/filebeat/data/registry/filebeat' succeeded. Active transaction id=0
+2024-05-27T13:22:53.339Z	INFO	memlog/store.go:124	Finished loading transaction log file for '/usr/share/filebeat/data/registry/filebeat'. Active transaction id=26
+2024-05-27T13:22:53.339Z	INFO	[registrar]	registrar/registrar.go:109	States Loaded from registrar: 1
+2024-05-27T13:22:53.339Z	INFO	[crawler]	beater/crawler.go:71	Loading Inputs: 0
+2024-05-27T13:22:53.340Z	INFO	[crawler]	beater/crawler.go:108	Loading and starting Inputs completed. Enabled inputs: 0
+2024-05-27T13:22:53.340Z	INFO	cfgfile/reload.go:164	Config reloader started
+2024-05-27T13:22:53.340Z	INFO	cfgfile/reload.go:224	Loading of config files completed.
+2024-05-27T13:23:01.692Z	INFO	beater/filebeat.go:515	Stopping filebeat
+2024-05-27T13:23:01.692Z	INFO	beater/crawler.go:148	Stopping Crawler
+2024-05-27T13:23:01.692Z	INFO	beater/crawler.go:158	Stopping 0 inputs
+2024-05-27T13:23:01.693Z	INFO	cfgfile/reload.go:227	Dynamic config reloader stopped
+2024-05-27T13:23:01.693Z	INFO	beater/crawler.go:178	Crawler stopped
+2024-05-27T13:23:01.693Z	INFO	[registrar]	registrar/registrar.go:132	Stopping Registrar
+2024-05-27T13:23:01.693Z	INFO	[registrar]	registrar/registrar.go:166	Ending Registrar
+2024-05-27T13:23:01.694Z	INFO	[registrar]	registrar/registrar.go:137	Registrar stopped
+2024-05-27T13:23:01.697Z	INFO	[monitoring]	log/log.go:153	Total non-zero metrics	{"monitoring": {"metrics": {"beat":{"cpu":{"system":{"ticks":70,"time":{"ms":79}},"total":{"ticks":110,"time":{"ms":128},"value":110},"user":{"ticks":40,"time":{"ms":49}}},"handles":{"limit":{"hard":1048576,"soft":1048576},"open":9},"info":{"ephemeral_id":"56f69311-e7b5-4ae6-89c7-6ab8e06c0a87","uptime":{"ms":8430}},"memstats":{"gc_next":15290992,"memory_alloc":7814992,"memory_total":35718896,"rss":67547136},"runtime":{"goroutines":10}},"filebeat":{"harvester":{"open_files":0,"running":0}},"libbeat":{"config":{"module":{"running":0},"reloads":1,"scans":1},"output":{"type":"elasticsearch"},"pipeline":{"clients":0,"events":{"active":0}}},"registrar":{"states":{"current":0}},"system":{"cpu":{"cores":12},"load":{"1":0.57,"15":0.29,"5":0.26,"norm":{"1":0.0475,"15":0.0242,"5":0.0217}}}}}}
+2024-05-27T13:23:01.698Z	INFO	[monitoring]	log/log.go:154	Uptime: 8.432539653s
+2024-05-27T13:23:01.698Z	INFO	[monitoring]	log/log.go:131	Stopping metrics logging.
+2024-05-27T13:23:01.698Z	INFO	instance/beat.go:456	filebeat stopped.

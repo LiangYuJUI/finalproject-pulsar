@@ -1,0 +1,2 @@
+{"timestamp": "2024-05-27T10:00:00", "level": "INFO", "message": "This is a sample log message 1"}
+{"timestamp": "2024-05-27T10:01:00", "level": "ERROR", "message": "This is a sample log message 2"}
