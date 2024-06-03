@@ -1,0 +1,2 @@
+對每種consumer多開teminal執行
+再開producer
