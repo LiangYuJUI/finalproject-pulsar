@@ -72,3 +72,9 @@ docker compose up -d
 docker compose up
 docker logs <ID>
 ```
+### elastic的更動
+測試兩個資料集 test.json, test2.json
+修改docker-compose.yml - logstash的Volume
+跑docker-compose up後
+在kibana上操作: ManageMent -> Index Pattern -> Create index pattern
+最後再到Discover做確認!!
