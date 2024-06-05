@@ -47,7 +47,7 @@ c. 用 ```cat``` 檢查有無寫入
 
 3. **```cd``` 至 ```pulsar``` 後 ```create``` 一個 ```connector``` 檔案夾**
 
-```bash mkdir connector```
+``` mkdir connector```
 
 進入之後用此指令下載 ```sinker```
 
