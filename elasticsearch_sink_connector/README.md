@@ -2,16 +2,16 @@
 # Elasticsearch sink connector
 
 
-1. **進入 pulsar 資料夾啟動 pulsar**
+1. **進入 ```pulsar``` 資料夾啟動 ```pulsar```**
 ```bash
 docker compose up -d
 ```
 
-同時進入 elastic 資料夾內啟動容器
+同時進入 ```elastic``` 資料夾內啟動容器
 
 
 
-2. **進入 pulsar 內部**
+2. **進入 ```pulsar``` 內部**
 
 ```bash
 docker exec -it broker /bin/bash
@@ -28,7 +28,7 @@ configs:
   username: "your_username"  
   password: "your_password"
 ```
-因為容器裡面沒裝vi, nano, sudo，啥都裝不了，所以可以用以下指令直接寫入
+因為容器裡面沒裝```vi, nano, sudo```，啥都裝不了，所以可以用以下指令直接寫入
 
 a. 
 ```bash
@@ -43,9 +43,9 @@ echo configs:
   password: "your_password"' > elasticsearch-sink.yml
 ```
 
-c. 用 cat 檢查有無寫入
+c. 用 ```cat``` 檢查有無寫入
 
-3. **cd 至 pulsar 後 create 一個 connector 檔案夾**
+3. **```cd``` 至 ```pulsar``` 後 ```create``` 一個 ```connector``` 檔案夾**
 
 ```bash mkdir connector```
 
@@ -75,7 +75,7 @@ bin/pulsar-admin sinks localrun \
 bin/pulsar-client produce elasticsearch_test --messages "{\"a\":1}"
 ```
 
-- 利用這兩行指令測試，有 ouput 就成功了
+- 利用這兩行指令測試，有 ```ouput``` 就成功了
 
 ``` 重置
 curl -s http://localhost:9200/my_index/_refresh
