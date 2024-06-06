@@ -19,8 +19,8 @@ const logger = winston.createLogger({
 });
 
 const server = http.createServer(handler)
-server.listen(3000, () => {
-	logger.info('listening at http://localhost:3000')
+server.listen(54088, () => {
+	logger.info('listening at http://localhost:54088')
 })
 
 function handler (req, res) {
