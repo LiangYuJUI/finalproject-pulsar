@@ -11,12 +11,14 @@ const start = async (event, charger_id, trans_id) => {
                 body: {
                     station_id: stationConfig.station_id,
                     charger_id: charger_id,
-                    trans_id:   trans_id
+                    trans_id: trans_id
                 }
             }
             // 送出 request
             logger.info(`Sending request to ${stationConfig.host}:${stationConfig.port}/api/ev_stop`, { 
-                events: JSON.stringify(requestOptions), 
+                station_id: requestOptions.body.station_id,
+                charger_id: requestOptions.body.charger_id, 
+                trans_id: requestOptions.body.trans_id,
                 logs_from: logs_from, 
                 function: "start"
             });
@@ -47,14 +49,14 @@ const start = async (event, charger_id, trans_id) => {
 
 export default defineEventHandler(async (event) => {
     // 收到request
-    logger.info('Request received', { events: JSON.stringify({method: event.node.req.method, url: event.node.req.url}), logs_from: logs_from, function: "main"});
+    // logger.info('Request received', { events: JSON.stringify({method: event.node.req.method, url: event.node.req.url}), logs_from: logs_from, function: "main"});
 
     setResponseHeaders(event, { "Content-Type":"application/json;charset=utf-8" } );
     const body = await readBody(event);
     const { charger_id } = body;
     if( charger_id == undefined ){
         // 收到 error
-        logger.error(`Error in ${logs_from}`, { events: "charger_id == undefined, 400 Bad Request", logs_from: logs_from, function: "main"});
+        // logger.error(`Error in ${logs_from}`, { events: "charger_id == undefined, 400 Bad Request", logs_from: logs_from, function: "main"});
 
         setResponseStatus(event, 400, "Bad Request");
         return { success: false, message: "Invalid POST body" } ;

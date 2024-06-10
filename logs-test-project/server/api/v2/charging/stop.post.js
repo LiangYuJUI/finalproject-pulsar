@@ -5,11 +5,11 @@ const runtimeConfig = useRuntimeConfig();
 const getTrans_id = async ( charger_id ) => {
     return new Promise ( async (resolve) => {
         // 送出 request
-        logger.info(`Sending request to ${runtimeConfig.LOCALHOST}/api/v2/station_status?charger_id=${charger_id}`, { 
-            events: JSON.stringify({url: `${runtimeConfig.LOCALHOST}/api/v2/station_status?charger_id=${charger_id}`}), 
-            logs_from: logs_from, 
-            function: "getTrans_id"
-        });
+        // logger.info(`Sending request to ${runtimeConfig.LOCALHOST}/api/v2/station_status?charger_id=${charger_id}`, { 
+        //     events: JSON.stringify({url: `${runtimeConfig.LOCALHOST}/api/v2/station_status?charger_id=${charger_id}`}), 
+        //     logs_from: logs_from, 
+        //     function: "getTrans_id"
+        // });
 
         // let result = await $fetch(`${runtimeConfig.LOCALHOST}/api/v2/station_status?charger_id=${charger_id}`);
         let result = null
@@ -38,7 +38,9 @@ const stop = async (event, charger_id) => {
 
             // 送出 request
             logger.info(`Sending request to ${stationConfig.host}:${stationConfig.port}/api/ev_stop`, { 
-                events: JSON.stringify(requestOptions), 
+                station_id: requestOptions.body.station_id,
+                charger_id: requestOptions.body.charger_id,
+                trans_id: requestOptions.body.trans_id,
                 logs_from: logs_from, 
                 function: "stop"
             });
@@ -72,13 +74,13 @@ const stop = async (event, charger_id) => {
 
 export default defineEventHandler(async (event) => {
     // 收到request
-    logger.info('Request received', { events: JSON.stringify({method: event.node.req.method, url: event.node.req.url}), logs_from: logs_from, function: "main"});
+    // logger.info('Request received', { events: JSON.stringify({method: event.node.req.method, url: event.node.req.url}), logs_from: logs_from, function: "main"});
 
     setResponseHeaders(event, { "Content-Type":"application/json;charset=UTF-8" });
     const { charger_id } = await readBody(event);
     if( charger_id == undefined ){
         // 收到 error
-        logger.error(`Error in ${logs_from}`, { events: "charger_id == undefined, 400 Bad Request", logs_from: logs_from, function: "main"});
+        // logger.error(`Error in ${logs_from}`, { events: "charger_id == undefined, 400 Bad Request", logs_from: logs_from, function: "main"});
 
         setResponseStatus(event, 400, `Bad Request`);
         return { success: false, message: `Invalid POST body` };

@@ -7,11 +7,13 @@ const register = async (event) => {
         const runtimeConfig = useRuntimeConfig();
         const ip = event.node.req.headers['x-forwarded-for'];
         // read cookie
+        console.log(event.node.req.headers)
         const user_jwt = parseCookies(event).jwt;
         // read&show body
         const { email, name, department, jobtitle, roles, station, password } = await readBody(event);
         if (!user_jwt) {
-            setResponseStatus(event, 401, "Unauthorized");
+            console.log("Unauthorized for JWT")
+            setResponseStatus(event, 401, "Unauthorized for JWT");
             resolve( { success: false, message: "Unauthorized" } );
             return ;
         }

@@ -1,4 +1,5 @@
 import stationConfig from "@/secret/gochabar.json";
+const runtimeConfig = useRuntimeConfig();
 const logs_from = "api/v2/station_status/index.js";
 const stationStatus = {
     isPeak: false,
@@ -14,24 +15,22 @@ const getAllPilesStatus = async () => {
     return new Promise( async (resolve) => {
         //try{
             const requestDetails = {
-                url: `${stationConfig.host}:${stationConfig.port}/api/ev_status`,
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": stationConfig.apikey},
-                body: { station_id: stationConfig.station_id, charger_id: "" }
+                url: `${runtimeConfig.LOCALHOST}/api/ev_status`,
+                method: "GET",
+                headers: { "Content-Type": "application/json"}
             };
 
             // 送出 request
-            logger.info(`Sending request to ${requestDetails.url}`, { events: JSON.stringify(requestDetails), logs_from: logs_from, function: "getAllPilesStatus"});
+            // logger.info(`Sending request to ${requestDetails.url}`, { events: JSON.stringify(requestDetails), logs_from: logs_from, function: "getAllPilesStatus"});
 
             const gochabar_result = await $fetch(requestDetails.url, {
                 method: requestDetails.method,
-                headers: requestDetails.headers,
-                body: requestDetails.body
+                headers: requestDetails.headers
             });
 
 
             // 收到 response
-            logger.info(`Received response from ${requestDetails.url}`, { events: JSON.stringify({rescode: gochabar_result.rescode, resmsg: gochabar_result.resmsg}), logs_from: logs_from, function: "getAllPilesStatus" });
+            // logger.info(`Received response from ${requestDetails.url}`, { events: JSON.stringify({rescode: gochabar_result.rescode, resmsg: gochabar_result.resmsg}), logs_from: logs_from, function: "getAllPilesStatus" });
             resolve( { success: true, message: gochabar_result } );
         //}
         // catch ( error ){
@@ -45,7 +44,7 @@ const getAllPilesStatus = async () => {
 
 export default defineEventHandler(async (event) => {
     // 收到request
-    logger.info('Request received', { events: JSON.stringify({method: event.node.req.method, url: event.node.req.url}), logs_from: logs_from, function: "main"});
+    // logger.info('Request received', { events: JSON.stringify({method: event.node.req.method, url: event.node.req.url}), logs_from: logs_from, function: "main"});
 
     const calledMethod = event.node.req.method;
     // console.log(event.node.req.headers)

@@ -1,15 +1,17 @@
 import stationConfig from "@/secret/gochabar.json"
+import fake_data from "./fake_data.json"
 
 var ev_status_all = { "data": [], "describe": "" };
 
 const get_ev_status_all = async () => {
     setTimeout(get_ev_status_all, 5000);
     try{
-        const gochabar_result = await $fetch(`${stationConfig.host}:${stationConfig.port}/api/ev_status`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Authorization": stationConfig.apikey },
-            body: { station_id: stationConfig.station_id, charger_id: "" }
-        });
+        // const gochabar_result = await $fetch(`${stationConfig.host}:${stationConfig.port}/api/ev_status`, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json", "Authorization": stationConfig.apikey },
+        //     body: { station_id: stationConfig.station_id, charger_id: "" }
+        // });
+        const gochabar_result = fake_data;
         ev_status_all.data = gochabar_result.data;
     }
     catch ( error ){
