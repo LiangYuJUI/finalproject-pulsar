@@ -4,3 +4,4 @@
 /npm_client/node_modules
 /logging_test/node_modules
 /logging_test/logs
+/pulsar/pulsar-client-test/node_modules
