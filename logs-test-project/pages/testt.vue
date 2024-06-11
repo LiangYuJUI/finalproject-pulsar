@@ -11,7 +11,7 @@ const { pending, data } = await useAsyncData('parkingspace', () => $fetch('/api/
     default: () => { }
 })
 
-// const { pending, data } = await useAsyncData('parkingspace', () => $fetch('/api/randomNumber'), {
+// const { pending, data } = await useAsyncData('parkingspace', () => $fetch('/api/randomNumber_charger_id'), {
 //     default: () => { }
 // })
 // useIntervalFn(() => {

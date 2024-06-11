@@ -360,9 +360,9 @@ const smartCharging = async (event, execNextTime) => {
                     if( (capacityLimit/1000 - charge_power) > 120 ){
                         let randomStartArr = [];
                         for( ; randomStartArr.length < 1 ; ){
-                            let randomNumber = Math.floor(Math.random()*preparingData.length);
-                            if(!randomStartArr.includes(randomNumber)){
-                                randomStartArr.push( randomNumber );
+                            let randomNumber_charger_id = Math.floor(Math.random()*preparingData.length);
+                            if(!randomStartArr.includes(randomNumber_charger_id)){
+                                randomStartArr.push( randomNumber_charger_id );
                             }
                         }
                         for( let i=0;i<randomStartArr.length;i++){
