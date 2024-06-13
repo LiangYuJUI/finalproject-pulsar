@@ -9,6 +9,11 @@ sudo chown -R 10000 data
 docker-compose up -d
 ```
 
+```
+如果pulsar-beat-output進不去
+sudo chown -R $(whoami):$(whoami) ~/log-server-test/finalproject-pulsar/filebeat/pulsar-beat-output
+```
+
 啟動FileBeat
 ```
 cd filebeat

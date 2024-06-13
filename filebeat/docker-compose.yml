@@ -11,26 +11,31 @@ services:
     volumes:
       - ./pulsar-beat-output:/app/pulsar-beat-output:rw
       - ../logging_test/logs:/app/filebeat/logs:ro
+      - ./config:/app/config:rw
       # - filebeat:/usr/share/filebeat/data
     working_dir: /app/pulsar-beat-output
-    
 
     # command: >
     #   /bin/sh -c "
     #   go build -o filebeat_build filebeat/filebeat.go &&
-    #   chown -R root:root sample/config/filebeat.yml test_module/modules.d/system.yml test_module/module/system &&
-    #   cp filebeat_build sample/config/filebeat.yml test_module &&
+    #   chown root:root . &&
+    #   chmod 700 . &&
+    #   cp filebeat_build test_module &&
+    #   cp ../config/filebeat.yml test_module &&
     #   cd test_module &&
-    #   chown -R root:root filebeat.yml
+    #   echo 'Enabling system module...' &&
+    #   ./filebeat_build -e -strict.perms=false &&
     #   ./filebeat_build modules enable system &&
+    #   echo 'Starting filebeat with custom configuration...' &&
     #   ./filebeat_build -c filebeat.yml --strict.perms=false
     #   "
+
     command: >
       /bin/sh -c "
-      go build -o filebeat_build filebeat/filebeat.go &&
       chown root:root . &&
       chmod 700 . &&
       cp filebeat_build test_module &&
+      cp ../config/filebeat.yml test_module &&
       cd test_module &&
       echo 'Enabling system module...' &&
       ./filebeat_build -e -strict.perms=false &&

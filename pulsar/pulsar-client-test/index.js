@@ -13,7 +13,7 @@ async function pulsarTest() {
 
     // Create a producer
     const producer = await client.createProducer({
-      topic: "persistent://public/default/my-topic",
+      topic: "persistent://np04/api-v2-charging-stop/my-topic",
     });
 
     console.log(producer)
@@ -21,7 +21,7 @@ async function pulsarTest() {
 
     // Create a consumer
     const consumer = await client.subscribe({
-      topic: "persistent://public/default/my-topic",
+      topic: "persistent://np04/api-v2-charging-stop/my-topic",
       subscription: "sub1",
     });
     console.log(consumer)
