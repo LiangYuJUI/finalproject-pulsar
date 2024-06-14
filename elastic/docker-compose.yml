@@ -18,10 +18,10 @@ services:
       - xpack.monitoring.enabled=false
       - cluster.name=elasticsearch
       - bootstrap.memory_lock=true
-    # networks:
-    #   - shared_network
+    networks:
+      - shared_network
     #   #- elk
-    network_mode: host
+    # network_mode: host
 
   logstash:
     image: logstash:7.9.1
@@ -40,11 +40,11 @@ services:
     command: >
       bash -c "bin/logstash-plugin install logstash-input-pulsar && bin/logstash"
 
-    # networks:
-    #   - shared_network
+    networks:
+      - shared_network
       #- elk
     #   - pulsar-pulsar
-    network_mode: host
+    # network_mode: host
     depends_on:
       - elasticsearch
 
@@ -56,10 +56,10 @@ services:
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
       - logs_server_kb_data:/usr/share/kibana/data
-    # networks:
-    #   - shared_network
+    networks:
+      - shared_network
       #- elk
-    network_mode: host
+    # network_mode: host
     depends_on:
       - elasticsearch
 
