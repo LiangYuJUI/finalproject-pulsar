@@ -4,7 +4,7 @@ async function pulsarTest() {
   // Create a client
   try {
     const client = new Pulsar.Client({
-      serviceUrl: "pulsar://localhost:6650",
+      serviceUrl: "pulsar://broker:6650",
       // serviceUrl: "https://527d-2001-b011-4004-daba-d04d-a342-3cc6-2ea4.ngrok-free.app"
       operationTimeoutSeconds: 300000
     });
@@ -13,7 +13,7 @@ async function pulsarTest() {
 
     // Create a producer
     const producer = await client.createProducer({
-      topic: "persistent://np04/api-v2-charging-stop/my-topic",
+      topic: "persistent://np04/api-v2-charging-stop/info",
     });
 
     console.log(producer)
@@ -21,7 +21,7 @@ async function pulsarTest() {
 
     // Create a consumer
     const consumer = await client.subscribe({
-      topic: "persistent://np04/api-v2-charging-stop/my-topic",
+      topic: "persistent://np04/api-v2-charging-stop/info",
       subscription: "sub1",
     });
     console.log(consumer)
