@@ -40,11 +40,11 @@ services:
     command: >
       bash -c "bin/logstash-plugin install logstash-input-pulsar && bin/logstash"
 
-    networks:
-      - shared_network
+    # networks:
+    #   - shared_network
       #- elk
     #   - pulsar-pulsar
-    # network_mode: host
+    network_mode: host
     depends_on:
       - elasticsearch
 
