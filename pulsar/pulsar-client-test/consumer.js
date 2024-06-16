@@ -4,7 +4,7 @@ async function runConsumer() {
   // Create a client
   try {
     const client = new Pulsar.Client({
-      serviceUrl: "pulsar://127.0.0.1:6650",
+      serviceUrl: "pulsar://localhost:6650",
       operationTimeoutSeconds: 300000
     });
     console.log(client)
