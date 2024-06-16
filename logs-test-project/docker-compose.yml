@@ -1,0 +1,16 @@
+version: '3'
+services:
+  np01:
+    image: node:18.6.0
+    volumes:
+      - .:/app
+    user: root
+    working_dir: /app
+    ports:
+      - "3001:3001"
+    environment:
+      - ROOT_DIR=/app
+    command: >
+      bash -c "ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' > /etc/timezone && PORT=3001 node .output/server/index.mjs"
+    restart: always
+    network_mode: host

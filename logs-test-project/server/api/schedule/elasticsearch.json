@@ -1,0 +1,6 @@
+{
+    "host": "https://localhost:9200",
+    "indexName": "busschedule",
+    "apiKey": "MmM5MjZlMzg0ZGJmZmY2ZjIzYjQxNzRlMGU2NGVkMGIwZDMzMmQ3MzAzOTkzNWM5YThlNDBhODhmZThkNWI4Mw==",
+    "caCertPath": "./server/api/schedule/ca/ca.crt"
+}

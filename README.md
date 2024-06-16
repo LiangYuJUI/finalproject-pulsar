@@ -13,9 +13,11 @@ https://github.com/twtrubiks/docker-elk-tutorial
 ```
 ```mermaid
 graph
-    A[Apache Pulsar] -->|message| B[Logstash 後端server]
-    B --> C[Elasticsearch y 資料庫NoSQL]
-    C --> D[Kibana 視覺化UI]
+    E[logs/log*.log] -->|logs採集| F[FileBeat]
+    F -->|output.pulsar| A
+    A[Apache Pulsar as Data Center] -->|message| B[Logstash as Pulsar Consumers]
+    B --> C[Elasticsearch NoSQL]
+    C --> D[Kibana UI]
 ```
 
 ### Pulsar佈署流程

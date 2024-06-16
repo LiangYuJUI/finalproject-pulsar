@@ -1,0 +1,83 @@
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+project_name: beat
+builds:
+  - id: "auditbeat"
+    dir: "auditbeat"
+    main: ./auditbeat.go
+    goos:
+      - linux
+    goarch:
+      - arm64
+      - amd64
+  - id: "filebeat"
+    dir: "filebeat"
+    main: ./filebeat.go
+    goos:
+      - linux
+    goarch:
+      - arm64
+      - amd64
+  - id: "heartbeat"
+    dir: "heartbeat"
+    main: ./heartbeat.go
+    goos:
+      - linux
+    goarch:
+      - arm64
+      - amd64
+  - id: "metricbeat"
+    dir: "metricbeat"
+    main: ./metricbeat.go
+    goos:
+      - linux
+    goarch:
+      - arm64
+      - amd64
+  - id: "winlogbeat"
+    env:
+      - CGO_ENABLED=0
+    dir: "winlogbeat"
+    main: ./winlogbeat.go
+    goos:
+      - linux
+    goarch:
+      - arm64
+      - amd64
+archives:
+  - id: "auditbeat"
+    builds:
+      - "auditbeat"
+    format: "binary"
+    name_template: "auditbeat_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+  - id: "filebeat"
+    builds:
+      - "filebeat"
+    format: "binary"
+    name_template: "filebeat_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+  - id: "heartbeat"
+    builds:
+      - "heartbeat"
+    format: "binary"
+    name_template: "heartbeat_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+  - id: "metricbeat"
+    builds:
+      - "metricbeat"
+    format: "binary"
+    name_template: "metricbeat_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+  - id: "winlogbeat"
+    builds:
+      - "winlogbeat"
+    format: "binary"
+    name_template: "winlogbeat_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'

@@ -5,10 +5,10 @@ services:
     image: elasticsearch:7.9.1
     container_name: elasticsearch
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9201:9200"
+      - "9301:9300"
     volumes:
-      - test_data:/usr/share/elasticsearch/data/
+      - logs_server_test_data:/usr/share/elasticsearch/data/
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     environment:
       - discovery.type=single-node
@@ -19,21 +19,32 @@ services:
       - cluster.name=elasticsearch
       - bootstrap.memory_lock=true
     networks:
-      - elk
+      - shared_network
+    #   #- elk
+    # network_mode: host
 
   logstash:
     image: logstash:7.9.1
     container_name: logstash
     ports:
-      - "5044:5044"
-      - "9600:9600"
+      - "5045:5044"
+      - "9601:9600"
     volumes:
-      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ls_data:/usr/share/logstash/data
+      # - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      # - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/config:/usr/share/logstash/config
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline
+      - logs_server_ls_data:/usr/share/logstash/data
+      # - ./logstash/logstash-input-pulsar-2.7.1.zip:/usr/share/logstash/logstash-input-pulsar-2.7.1.zip
+    working_dir: /usr/share/logstash
+    command: >
+      bash -c "bin/logstash-plugin install logstash-input-pulsar && bin/logstash"
 
-    networks:
-      - elk
+    # networks:
+    #   - shared_network
+      #- elk
+    #   - pulsar-pulsar
+    network_mode: host
     depends_on:
       - elasticsearch
 
@@ -41,20 +52,28 @@ services:
     image: kibana:7.9.1
     container_name: kibana
     ports:
-      - "5601:5601"
+      - "5602:5601"
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
-      - kb_data:/usr/share/kibana/data
+      - logs_server_kb_data:/usr/share/kibana/data
     networks:
-      - elk
+      - shared_network
+      #- elk
+    # network_mode: host
     depends_on:
       - elasticsearch
 
+# networks:
+#   elk:
+#     driver: bridge
 networks:
-  elk:
-    driver: bridge
+  shared_network:
+    external:
+      name: shared_network
+  # elk:
+  #   driver: bridge
 
 volumes:
-  test_data:
-  ls_data:
-  kb_data:
+  logs_server_test_data:
+  logs_server_ls_data:
+  logs_server_kb_data:

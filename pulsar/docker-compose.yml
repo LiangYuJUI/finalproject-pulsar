@@ -1,7 +1,11 @@
 version: '3'
+# networks:
+#   pulsar:
+#     driver: bridge
 networks:
-  pulsar:
-    driver: bridge
+  shared_network:
+    external:
+      name: shared_network
 services:
   # Start zookeeper
   zookeeper:
@@ -9,7 +13,8 @@ services:
     container_name: zookeeper
     restart: on-failure
     networks:
-      - pulsar
+      - shared_network
+      # - pulsar
     volumes:
       - ./data/zookeeper:/pulsar/data/zookeeper
     environment:
@@ -31,7 +36,8 @@ services:
     hostname: pulsar-init
     image: apachepulsar/pulsar:latest
     networks:
-      - pulsar
+      - shared_network
+      # - pulsar
     command: >
       bin/pulsar initialize-cluster-metadata \
                --cluster cluster-a \
@@ -50,7 +56,8 @@ services:
     container_name: bookie
     restart: on-failure
     networks:
-      - pulsar
+      - shared_network
+      # - pulsar
     environment:
       - clusterName=cluster-a
       - zkServers=zookeeper:2181
@@ -78,7 +85,8 @@ services:
     hostname: broker
     restart: on-failure
     networks:
-      - pulsar
+      - shared_network
+      # - pulsar
     environment:
       - metadataStoreUrl=zk:zookeeper:2181
       - zookeeperServers=zookeeper:2181
