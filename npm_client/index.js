@@ -6,7 +6,7 @@ async function pulsarTest() {
     const client = new Pulsar.Client({
       serviceUrl: "pulsar://localhost:6650",
       // serviceUrl: "https://527d-2001-b011-4004-daba-d04d-a342-3cc6-2ea4.ngrok-free.app"
-      operationTimeoutSeconds: 300000
+      //operationTimeoutSeconds: 3000
     });
     console.log(client)
     console.log("client test\n");

@@ -15,23 +15,9 @@ services:
       # - filebeat:/usr/share/filebeat/data
     working_dir: /app/pulsar-beat-output
 
-    # command: >
-    #   /bin/sh -c "
-    #   go build -o filebeat_build filebeat/filebeat.go &&
-    #   chown root:root . &&
-    #   chmod 700 . &&
-    #   cp filebeat_build test_module &&
-    #   cp ../config/filebeat.yml test_module &&
-    #   cd test_module &&
-    #   echo 'Enabling system module...' &&
-    #   ./filebeat_build -e -strict.perms=false &&
-    #   ./filebeat_build modules enable system &&
-    #   echo 'Starting filebeat with custom configuration...' &&
-    #   ./filebeat_build -c filebeat.yml --strict.perms=false
-    #   "
-
     command: >
       /bin/sh -c "
+      go build -o filebeat_build filebeat/filebeat.go &&
       chown root:root . &&
       chmod 700 . &&
       cp filebeat_build test_module &&
@@ -43,6 +29,20 @@ services:
       echo 'Starting filebeat with custom configuration...' &&
       ./filebeat_build -c filebeat.yml --strict.perms=false
       "
+
+    # command: >
+    #   /bin/sh -c "
+    #   chown root:root . &&
+    #   chmod 700 . &&
+    #   cp filebeat_build test_module &&
+    #   cp ../config/filebeat.yml test_module &&
+    #   cd test_module &&
+    #   echo 'Enabling system module...' &&
+    #   ./filebeat_build -e -strict.perms=false &&
+    #   ./filebeat_build modules enable system &&
+    #   echo 'Starting filebeat with custom configuration...' &&
+    #   ./filebeat_build -c filebeat.yml --strict.perms=false
+    #   "
 
     environment:
       - GO111MODULE=on
