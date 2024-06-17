@@ -12,7 +12,7 @@ async function runConsumer() {
 
     // Create a consumer
     const consumer = await client.subscribe({
-      topic: "persistent://np01/api-v2-charging-stop/info",
+      topic: "persistent://np01/api-v2-charging-set-current/info",
       subscription: "sub2",
       ackTimeoutMs: 800000
     });

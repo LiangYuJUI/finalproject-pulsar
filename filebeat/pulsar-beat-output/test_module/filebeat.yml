@@ -31,14 +31,15 @@ processors:
       id: "route_to_topic"
       source: >
         function process(event) {
-          var stationId = event.fields.station_id;
-          switch(stationId) {
-            case 'KL_1012':
-              event.fields.topic = 'persistent://np01/api-v2-charging-stop/info';
-              console.log("np01")
+          switch(event.fields.logs_from) {
+            case 'api/v2/charging/stop.post.js':
+              event.fields.namespace = 'api-v2-charging-stop';
               break;
-            case 'KL_0004':
-              event.fields.topic = 'persistent://np04/api-v2-charging-stop/info';
+            case 'api/v2/charging/start.post.js':
+              event.fields.namespace = 'api-v2-charging-start';
+              break;
+            case 'api/v2/charging/set/current.post.js':
+              event.fields.namespace = 'api-v2-charging-set-current';
               break;
             default:
               event.fields.topic = 'my_topic_default';
@@ -54,7 +55,7 @@ processors:
 # -------------------------- pulsar output ------------------------------
 output.pulsar:
   url: "pulsar://localhost:6650"
-  topic: "%{[topic]}"
+  topic: "persistent://%{[np_system_id]}/%{[namespace]}/%{[level]}"
   # topic: persistent://np01/api-v2-charging-stop/info
   name: np-system
   # Supported level: panic, fatal, error, warn, info, debug, trace

@@ -5,8 +5,8 @@ services:
     image: elasticsearch:7.9.1
     container_name: elasticsearch
     ports:
-      - "9201:9200"
-      - "9301:9300"
+      - "9200:9200"
+      - "9300:9300"
     volumes:
       - logs_server_test_data:/usr/share/elasticsearch/data/
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
@@ -18,17 +18,17 @@ services:
       - xpack.monitoring.enabled=false
       - cluster.name=elasticsearch
       - bootstrap.memory_lock=true
-    networks:
-      - shared_network
-    #   #- elk
-    # network_mode: host
+    # networks:
+    #   # - shared_network
+    #   - elk
+    network_mode: host
 
   logstash:
     image: logstash:7.9.1
     container_name: logstash
     ports:
-      - "5045:5044"
-      - "9601:9600"
+      - "5044:5044"
+      - "9600:9600"
     volumes:
       # - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       # - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
@@ -52,24 +52,24 @@ services:
     image: kibana:7.9.1
     container_name: kibana
     ports:
-      - "5602:5601"
+      - "5601:5601"
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
       - logs_server_kb_data:/usr/share/kibana/data
-    networks:
-      - shared_network
-      #- elk
-    # network_mode: host
+    # networks:
+    #   # - shared_network
+    #   - elk
+    network_mode: host
     depends_on:
       - elasticsearch
 
 # networks:
 #   elk:
 #     driver: bridge
-networks:
-  shared_network:
-    external:
-      name: shared_network
+# networks:
+#   shared_network:
+#     external:
+#       name: shared_network
   # elk:
   #   driver: bridge
 

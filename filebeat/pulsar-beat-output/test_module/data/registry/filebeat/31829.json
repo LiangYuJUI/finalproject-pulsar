@@ -1,0 +1,6 @@
+[
+{"_key":"filebeat::logs::native::3377699720804977-83","prev_id":"","timestamp":[306671959,1718562203],"type":"log","ttl":-1,"FileStateOS":{"device":83,"inode":3377699720804977},"identifier_name":"native","id":"native::3377699720804977-83","source":"/app/filebeat/logs/log-error-2024-06-17.log","offset":174228},
+{"_key":"filebeat::logs::native::844424931411812-83","prev_id":"","source":"/app/filebeat/logs/log-2024-05-26.json","ttl":-2,"type":"log","identifier_name":"native","id":"native::844424931411812-83","offset":3830,"timestamp":[843785813,1716742283],"FileStateOS":{"inode":844424931411812,"device":83}},
+{"_key":"filebeat::logs::native::39687971716551428-83","timestamp":[247728119,1716743090],"identifier_name":"native","id":"native::39687971716551428-83","prev_id":"","offset":15997,"FileStateOS":{"inode":39687971716551424,"device":83},"source":"/app/filebeat/logs/log-2024-05-27.json","ttl":-2,"type":"log"},
+{"_key":"filebeat::logs::native::34621422135507170-83","offset":1070940,"timestamp":[151085106,1718562214],"ttl":-1,"FileStateOS":{"inode":34621422135507170,"device":83},"identifier_name":"native","id":"native::34621422135507170-83","prev_id":"","source":"/app/filebeat/logs/log-info-2024-06-17.log","type":"log"}
+]
